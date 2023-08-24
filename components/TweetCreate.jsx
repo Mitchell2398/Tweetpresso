@@ -91,7 +91,7 @@ export default function TweetCreate(props) {
       <div className="bottomRowContainer">
         <div className="leftContainer">
           <label>
-            <img className="tweetIcon postImg" src="./src/assets/img.png"></img>
+            <img className="tweetIcon postImg" src="https://firebasestorage.googleapis.com/v0/b/react-chat-app-7171d.appspot.com/o/assets%2Fimg.png?alt=media&token=1031f3c7-01a0-4a1e-b250-f81c0a72b1d7"></img>
             <input
               className="fileUpload"
               type="file"
@@ -102,12 +102,12 @@ export default function TweetCreate(props) {
           </label>
           <img
             className="tweetIcon postGif"
-            src="./src/assets/gif.png"
+            src="https://firebasestorage.googleapis.com/v0/b/react-chat-app-7171d.appspot.com/o/assets%2Fgif.png?alt=media&token=22d10b15-2bde-4501-89d1-a11dca1d0aa6"
             onClick={props.handlePostGifClick}
           ></img>
           <img
             className="tweetIcon postEmoji"
-            src="./src/assets/smiley.png"
+            src="https://firebasestorage.googleapis.com/v0/b/react-chat-app-7171d.appspot.com/o/assets%2Fsmiley.png?alt=media&token=19646334-1ae0-4595-9f9b-e1e581a47a6a"
             onClick={() => setShowEmojiPicker((prevState) => !prevState)}
           ></img>
         </div>

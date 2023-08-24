@@ -239,7 +239,7 @@ function setupPage({ updateCurrentUser }) {
               </button>
 
               <img
-                src="../src/assets/icons8-google-60.png"
+                src="https://firebasestorage.googleapis.com/v0/b/react-chat-app-7171d.appspot.com/o/assets%2Ficons8-google-60.png?alt=media&token=4f520ee6-afae-468f-9e8e-6d7ebcb59e35"
                 className="icon"
                 onClick={signInWithGoogle}
               />
@@ -282,7 +282,7 @@ function setupPage({ updateCurrentUser }) {
               </button>
 
               <img
-                src="../src/assets/icons8-google-60.png"
+                src="https://firebasestorage.googleapis.com/v0/b/react-chat-app-7171d.appspot.com/o/assets%2Ficons8-google-60.png?alt=media&token=4f520ee6-afae-468f-9e8e-6d7ebcb59e35"
                 className="icon"
                 onClick={signInWithGoogle}
               />
@@ -298,7 +298,7 @@ function setupPage({ updateCurrentUser }) {
       )}
     </div>
     </div>
-  );
+  )
 }
 
 export default setupPage;

@@ -14,8 +14,6 @@ export default function TweetPost(props) {
   const tweetRef = doc(db, "tweets", props.tweetId);
   const userId = auth.currentUser.uid;
 
-  
-
   const handleLikeCount = async () => {
     try {
       const tweetSnapshot = await getDoc(tweetRef);
@@ -41,77 +39,77 @@ export default function TweetPost(props) {
     }
   };
 
-// Fetch like data without dependency on handleLikeCount
-useEffect(() => {
-  async function fetchLikeData() {
-    const tweetSnapshot = await getDoc(tweetRef);
-    if (tweetSnapshot.exists()) {
-      const tweetData = tweetSnapshot.data();
-      if (tweetData.likes) {
-        setLikeCount(Object.keys(tweetData.likes).length);
-        setLiked(!!tweetData.likes[userId]);
-        console.log("like data fetched");
+  // Fetch like data without dependency on handleLikeCount
+  useEffect(() => {
+    async function fetchLikeData() {
+      const tweetSnapshot = await getDoc(tweetRef);
+      if (tweetSnapshot.exists()) {
+        const tweetData = tweetSnapshot.data();
+        if (tweetData.likes) {
+          setLikeCount(Object.keys(tweetData.likes).length);
+          setLiked(!!tweetData.likes[userId]);
+          console.log("like data fetched");
+        }
       }
     }
-  }
-  fetchLikeData();
-}, []);
+    fetchLikeData();
+  }, []);
 
-// Update like count and state when liked state changes
-useEffect(() => {
-  async function updateLikeData() {
-    const tweetSnapshot = await getDoc(tweetRef);
-    if (tweetSnapshot.exists()) {
-      const tweetData = tweetSnapshot.data();
-      setLikeCount(Object.keys(tweetData.likes || {}).length);
-    }
-  }
-  updateLikeData();
-}, [liked]);
-
-const handleCommentSubmit = async (event) => {
-  event.preventDefault();
-  try {
-    const tweetSnapshot = await getDoc(tweetRef);
-    if (tweetSnapshot.exists()) {
-      const tweetData = tweetSnapshot.data();
-      const updatedComments = tweetData.comments || [];
-      updatedComments.push({
-        userName: props.userName,
-        comment: comment,
-      });
-
-      await updateDoc(tweetRef, {
-        comments: updatedComments,
-      });
-
-      setComment(""); // Clear the comment input after submission
-      setTweetCommentVis(false);
-      console.log("comment data uploaded");
-    }
-  } catch (error) {
-    console.error("Error updating comments:", error);
-  }
-};
-
-// Fetches comment data in real-time when comments change
-useEffect(() => {
-  const unsubscribe = onSnapshot(tweetRef, (docSnapshot) => {
-    if (docSnapshot.exists()) {
-      const tweetData = docSnapshot.data();
-      if (tweetData.comments) {
-        setCommentCount(Object.keys(tweetData.comments).length);
-        setCommentArr(tweetData.comments);
-        console.log("comment data fetched in real-time");
+  // Update like count and state when liked state changes
+  useEffect(() => {
+    async function updateLikeData() {
+      const tweetSnapshot = await getDoc(tweetRef);
+      if (tweetSnapshot.exists()) {
+        const tweetData = tweetSnapshot.data();
+        setLikeCount(Object.keys(tweetData.likes || {}).length);
       }
     }
-  });
+    updateLikeData();
+  }, [liked]);
 
-  // Unsubscribe from real-time updates when the component unmounts
-  return () => {
-    unsubscribe();
+  const handleCommentSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      const tweetSnapshot = await getDoc(tweetRef);
+      if (tweetSnapshot.exists()) {
+        const tweetData = tweetSnapshot.data();
+        const updatedComments = tweetData.comments || [];
+        updatedComments.push({
+          userName: props.userName,
+          comment: comment,
+        });
+
+        await updateDoc(tweetRef, {
+          comments: updatedComments,
+        });
+
+        setComment(""); // Clear the comment input after submission
+        setTweetCommentVis(false);
+        console.log("comment data uploaded");
+      }
+    } catch (error) {
+      console.error("Error updating comments:", error);
+    }
   };
-}, []); 
+
+  // Fetches comment data in real-time when comments change
+  useEffect(() => {
+    const unsubscribe = onSnapshot(tweetRef, (docSnapshot) => {
+      if (docSnapshot.exists()) {
+        const tweetData = docSnapshot.data();
+        if (tweetData.comments) {
+          setCommentCount(Object.keys(tweetData.comments).length);
+          setCommentArr(tweetData.comments);
+          console.log("comment data fetched in real-time");
+        }
+      }
+    });
+
+    // Unsubscribe from real-time updates when the component unmounts
+    return () => {
+      unsubscribe();
+    };
+  }, []);
 
   function handleCommentClick() {
     setTweetCommentVis(true);
@@ -129,7 +127,7 @@ useEffect(() => {
 
   const renderComments = commentArr.map((comment, index) => (
     <div className="comment" key={index}>
-        <strong>{comment.userName}:</strong> {comment.comment}
+      <strong>{comment.userName}:</strong> {comment.comment}
     </div>
   ));
 
@@ -168,7 +166,9 @@ useEffect(() => {
           <div className="likeContainer">
             <img
               src={
-                liked ? "./src/assets/likedHeart.png" : "./src/assets/heart.png"
+                liked
+                  ? "https://firebasestorage.googleapis.com/v0/b/react-chat-app-7171d.appspot.com/o/assets%2FLikedHeart.png?alt=media&token=1db7e053-b640-46d6-98fc-bf3a00f30e9b"
+                  : "https://firebasestorage.googleapis.com/v0/b/react-chat-app-7171d.appspot.com/o/assets%2Fheart.png?alt=media&token=130ce70c-1510-4fb5-b589-abab1c9594a9"
               }
               className="likeBtn"
               onClick={handleLikeCount}
@@ -176,12 +176,12 @@ useEffect(() => {
             <p className="likeCount">{likeCount}</p>
           </div>
           <div className="commentBtnContainer">
-          <img
-            src="./src/assets/comment.png"
-            onClick={handleCommentClick}
-            className="commentBtn"
-          ></img>
-          <p className="commentCount">{commentCount}</p>
+            <img
+              src="https://firebasestorage.googleapis.com/v0/b/react-chat-app-7171d.appspot.com/o/assets%2Fcomment.png?alt=media&token=da6a0a91-877e-416c-9edf-af4950c3969b"
+              onClick={handleCommentClick}
+              className="commentBtn"
+            ></img>
+            <p className="commentCount">{commentCount}</p>
           </div>
         </div>
       ) : (
