@@ -1,0 +1,829 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Lato";
+  background-color: transparent;
+  
+  
+}
+
+/* Setup page css */
+
+.setupPageContainer {
+  min-height: 100svh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  z-index: 2;
+  background-color: transparent;
+  
+}
+
+.backgroundSvg {
+  position: absolute;
+		top: 0;
+		left: 0;
+    width: 100%;
+    height: 100%;
+		box-sizing: border-box;
+		display: block;
+		background-color: #bcaaa4;
+    background-image: linear-gradient(to bottom, #bcaaa4, #5d210d);
+    z-index: -1; /* Place the SVG behind other content */
+    pointer-events: none; /* Allow interactions with elements below */
+}
+
+.registerContainer,
+.signInContainer {
+  display: flex;
+  flex-direction: column;
+  align-content: start;
+  justify-content: space-around;
+  background-color: white;
+  padding: 25px;
+  border-radius: 15px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  height: 400px;
+  min-width: 30%;
+}
+
+.setupHeader{
+  display: flex;
+  position: fixed;
+  justify-content: space-between;
+  align-items: center;
+  height: 75px;
+  width: 100%;
+  background-color: #fff;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+  padding: 10px 5px;
+  z-index: 5;
+  
+}
+
+
+
+.formH1 {
+  font-weight: 500;
+}
+
+input {
+  width: 100%;
+  padding: 10px 0px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  transition: border-color 0.3s ease;
+}
+
+input:focus {
+  outline: none;
+  border-color: #66afe9;
+  box-shadow: 0 0 5px rgba(102, 175, 233, 0.5);
+}
+
+input::placeholder {
+  color: #999;
+  padding-left: 2px;
+}
+
+.formBtn {
+  align-self: flex-start;
+  padding: 12.5px 20px;
+  border: none;
+  border-radius: 4px;
+  background-color: #007bff;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.formBtn:hover {
+  background-color: #0056b3;
+}
+
+.signSpan {
+  color: #0056b3;
+  cursor: pointer;
+}
+
+.errorMessage {
+  padding: 0;
+  margin: 0;
+  color: red;
+}
+
+.providersContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 5px;
+}
+
+.icon {
+  height: auto;
+  width: 35px;
+  cursor: pointer;
+}
+
+/* Header css */
+
+.headerContainer {
+  display: flex;
+  position: fixed;
+  justify-content: space-between;
+  align-items: center;
+  height: 75px;
+  width: 100%;
+  background-color: #fff;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+  padding: 10px 5px;
+  z-index: 5;
+}
+
+.logo {
+  letter-spacing: 5px;
+  font-weight: 500;
+  margin-left: 10px;
+  color: #bcaaa4;
+}
+
+.profileImg {
+  width: 65px;
+  height: 65px; /* Fixed square size */
+  object-fit: cover; /* This ensures the image covers the entire space while maintaining aspect ratio */
+  border-radius: 50%;
+  margin-right: 15px;
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+}
+
+/* Home Page css */
+
+.feedContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 75px;
+}
+
+@media (max-width: 600px) {
+.feedContainer {
+  padding-top: 100px;
+}
+}
+
+/* tweetCreate css */
+
+.tweetCreateContainer {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  min-width: 30%;
+  border-radius: 10px;
+  box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.1);
+  margin-top: 25px;
+  background-color: #fff;
+}
+
+.topRowContainer {
+  display: flex;
+  width: 100%;
+  align-items: start;
+  justify-content: space-between;
+  margin-top: 25px;
+}
+
+.tweetText {
+  width: 100%;
+  resize: none; /* Prevent textarea from being resizable */
+  border: none;
+  font-size: 18px;
+  font-family: "Lato", Arial, sans-serif;
+  padding: 50px 5px;
+  outline: none;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.tweetText::placeholder {
+  color: #3e2723;
+  opacity: 0.7;
+}
+
+.gifImg {
+  height: auto;
+  width: 40%;
+}
+
+.charLimit {
+  margin-top: 10px;
+  font-size: 14px;
+  margin-left: 5px;
+}
+
+.bottomRowContainer {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 15px;
+}
+
+.tweetIcon {
+  height: auto;
+  width: 25px;
+  margin-right: 15px;
+  cursor: pointer;
+  opacity: 0.7;
+}
+
+.leftContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  align-items: center;
+  padding: 0;
+}
+
+.postBtn {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 20px;
+  background-color: #006d5b;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.postBtn:hover {
+  background-color: #1d1210;
+}
+
+@media (max-width: 600px) {
+  .TopRowContainer {
+    flex-direction: column; /* Stack profile image and text container vertically */
+    padding: 5px 0;
+  }
+  .tweetCreateContainer {
+    min-width: 90%; /* Expand to full width on smaller screens */
+  }
+
+  .profileImgTp {
+    margin-bottom: 10px;
+  }
+}
+
+/* GifPopup.css */
+.gifPopupOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent overlay */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9;
+}
+
+.gifPopupContainer {
+  /* Add styles for your popup content here */
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+ 
+}
+
+.flexContainerRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+
+.gifCloseBtn {
+  font-size: 20px;
+  background: #ff0000;
+  border-radius: 50%;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  color: white;
+  margin-left: 5px;
+}
+
+.gifCloseBtn:hover {
+  color: #a30000;
+}
+
+
+.uploadImgContainer {
+  position: relative;
+  width: 100%;
+  padding-top: 50%; 
+  margin-bottom: 10px;
+}
+
+.uploadImg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* This ensures the image maintains its aspect ratio within the container */
+}
+
+.closeImgBtn {
+  position: absolute;
+  top: 5px;
+  right: 5px; /* Adjust this value as needed for precise positioning */
+  font-size: 20px;
+  background: #ff0000;
+  border-radius: 50%;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  color: white;
+  display: flex;
+  justify-content: center; /* Center the content horizontally */
+  align-items: center; /* Center the content vertically */
+  width: 30px; /* Adjust this value as needed for the close button width */
+  height: 30px; /* Adjust this value as needed for the close button height */
+  z-index: 6;
+}
+
+.closeImgBtn:hover {
+  color: #a30000;
+}
+
+.gifPopupContainer input {
+  width: 100%;
+  padding-left: 2px;
+  margin: 5px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.gifList {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(120px, 1fr)
+  ); /* Responsive grid */
+  grid-gap: 10px;
+}
+
+.gifList img {
+  width: 100%;
+  height: auto;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: transform 0.2s ease-in-out;
+}
+
+.gifList img:hover {
+  transform: scale(1.05);
+}
+
+@media (max-width: 768px) {
+  .gifPopupContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 70%;
+    height: 70%;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow-y: scroll;
+  }
+
+  .uploadImg {
+    max-height: 50vh; /* Adjust this value as needed for smaller screens */
+  }
+}
+
+/* tweetPost css */
+.tweetPostContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  min-width: 30%;
+  border-radius: 10px;
+  box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  margin: 25px 0px;
+  padding: 10px;
+}
+
+.TopRowContainerTp {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: nowrap;
+  width: 100%;
+  margin-top: 25px;
+  justify-content: flex-start;
+}
+
+.textContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  width: 100%;
+}
+
+.profileImgTp {
+  width: 65px;
+  height: 65px; /* Fixed square size */
+  object-fit: cover; /* This ensures the image covers the entire space while maintaining aspect ratio */
+  border-radius: 50%;
+  margin-right: 15px;
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+  align-self: flex-start;
+  
+}
+
+.userName {
+  font-size: 20px;
+  font-weight: bold;
+  margin: 0;
+  padding: 0;
+}
+
+.date{
+  font-weight: 300;
+  font-size: 18px;
+  color: gray
+}
+
+.tweetPostText {
+  max-width: 100%; /* Limit the width of the tweet text */
+  min-height: 100px;
+  padding: 10px 0;
+  font-size: 18px;
+  font-family: "Lato", Arial, sans-serif;
+  outline: none;
+  margin: 0;
+  word-wrap: break-word; /* Allow text to wrap */
+}
+
+.buttonContainerTp {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+}
+
+.likeBtn,
+.commentBtn,
+.shareBtn {
+  height: auto;
+  width: 25px;
+  cursor: pointer;
+  opacity: 0.7;
+}
+
+.likeContainer, .commentBtnContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 15px;
+  
+}
+
+.likeCount, .commentCount {
+  margin-left: 5px;
+}
+
+
+
+
+
+@media (max-width: 600px) {
+  .TopRowContainerTp {
+    flex-direction: column; /* Stack profile image and text container vertically */
+    padding: 5px 0;
+  }
+  .tweetPostContainer {
+    min-width: 90%; /* Expand to full width on smaller screens */
+  }
+
+  
+} 
+
+/* Loader css */
+
+.loader{
+  display: block;
+  margin: 0 auto;
+  border-color: red;
+}
+
+/* Css for UserProfile */
+
+.userProfilePuContainer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 500px; /* Adjust the width as needed */
+  height: 100%;
+  max-height: calc(
+    100% - 100px
+  ); /* Subtract the top margin to make space for header */
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  z-index: 9;
+  transform: translateX(100%);
+  transition: transform 0.3s;
+  padding: 10px 15px;
+  margin-top: 80px;
+  animation-name: slideIn;
+  animation-duration: 0.3s;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: forwards;
+  overflow-y: auto;
+}
+
+.userProfilePuContainer.active {
+  transform: translateX(0);
+  overflow-y: auto;
+}
+
+.disable-scroll {
+  overflow: hidden;
+}
+
+.darkOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.9);
+  display: none;
+  z-index: 2;
+}
+
+.darkOverlay.active {
+  display: block;
+}
+
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.puWrapper {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  width: 100%;
+ 
+}
+
+.popUpHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 50px;
+  border-bottom: 1px solid #333333;
+  margin-bottom: 15px;
+}
+
+.arrow {
+  position: relative;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  /*   border:solid 1px white; */
+  transition: 0.5s;
+  overflow: hidden;
+}
+
+.arrow:hover {
+  /*  animation:borderAni 5s cubic-bezier(0, 0.6, 1, 0.4); */
+  border: solid 2px #333333;
+  border-radius: 50%;
+}
+.arrow:after {
+  position: absolute;
+  display: block;
+  content: "";
+  color: #333333;
+  width: 20px;
+  height: 15px;
+  /*   border:solid 1px;  */
+  top: -1px;
+  border-bottom: solid 2px;
+  transform: translatex(4px);
+}
+
+.arrow:before {
+  position: absolute;
+  display: block;
+  content: "";
+  color: #333333;
+  width: 8px;
+  height: 8px;
+  /*   border:solid 1px;  */
+  border-top: solid 2px;
+  border-left: solid 2px;
+  top: 50%;
+  left: 2px;
+  transform-origin: 0% 0%;
+  transform: rotatez(-45deg);
+}
+.arrow:hover:before {
+  animation: aniArrow01 1s cubic-bezier(0, 0.6, 1, 0.4) infinite 0.5s;
+}
+
+.arrow:hover:after {
+  animation: aniArrow02 1s cubic-bezier(0, 0.6, 1, 0.4) infinite 0.5s;
+}
+
+@keyframes aniArrow01 {
+  0% {
+    transform: rotatez(-45deg) translateY(30px) translateX(30px);
+  }
+  100% {
+    transform: rotatez(-45deg) translateY(-35px) translateX(-35px);
+  }
+}
+
+@keyframes aniArrow02 {
+  0% {
+    transform: translateX(45px);
+  }
+  100% {
+    transform: translateX(-44px);
+  }
+}
+
+@keyframes borderAni {
+  0% {
+    border: solid 2px white;
+  }
+  100% {
+    border: solid 2px white;
+    border-radius: 50%;
+  }
+}
+
+.backButton {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  margin: 0;
+  font-family: inherit;
+  font-size: inherit;
+  cursor: pointer;
+  outline: none;
+  font-weight: bold;
+  color: #333333;
+}
+
+.backButton:hover {
+  text-decoration: underline;
+}
+
+.signOutBtn {
+  align-self: center;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 20px;
+  background-color: #006d5b;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.signOutBtn:hover {
+  background-color: #013930;
+}
+
+.profileImgPu {
+  width: 100px;
+  height: 100px; /* Fixed square size */
+  object-fit: cover; /* This ensures the image covers the entire space while maintaining aspect ratio */
+  border-radius: 50%;
+  margin-right: 15px;
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+}
+
+.changeProfileImg{
+  margin: 0px;
+  padding-bottom: 15px;
+  text-decoration: underline;
+  color: grey;
+  cursor: pointer;
+}
+
+.profileInfo {
+  margin: 0px;
+  padding-bottom: 5px; 
+}
+
+@media (max-width: 600px) {
+  .userProfilePuContainer {
+    width: 100%;
+  }
+
+  .puWrapper {
+    width: 80%;
+    margin-bottom: 20px;
+  }
+
+  .profileInfo {
+    padding-bottom: 20px; 
+  }
+}
+
+/* Comment box component  */
+.commentContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.commentBox {
+  width: 100%;
+  resize: none; /* Prevent textarea from being resizable */
+  border: none;
+  font-size: 18px;
+  font-family: "Lato", Arial, sans-serif;
+  padding: 10px 5px;
+  outline: none;
+  margin-bottom: 10px;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.btnCommentContainer{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+}
+
+.commentSubmitBtn {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 20px;
+  background-color: #006d5b;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  margin-left: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.commentSubmitBtn:hover {
+  background-color: #012f27;
+}
+
+.commentCloseBtn {
+  font-size: 20px;
+  background: gray;
+  border-radius: 50%;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  color: white;
+  margin-left: 5px;
+}
+
+.commentCloseBtn:hover {
+  color: darkgray;
+}
+
+.comment {
+  padding-bottom: 5px;
+}
