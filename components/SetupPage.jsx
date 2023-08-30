@@ -11,7 +11,7 @@ import { storage } from "../src/firebase";
 import { ref, getDownloadURL } from "firebase/storage";
 import { collection, addDoc, setDoc, doc } from "firebase/firestore";
 
-function setupPage({ updateCurrentUser }) {
+function SetupPage({ updateCurrentUser }) {
   // State to manage the register / sign up of usersa
   const profileRef = collection(db, "profiles");
   const [registerUser, setRegisterUser] = React.useState({
