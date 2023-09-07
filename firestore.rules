@@ -1,19 +1,41 @@
-rules_version = '2';
-
 service cloud.firestore {
   match /databases/{database}/documents {
-    // Allow read access to authenticated users
-    match /{document=**} {
-      allow read: if request.auth != null;
+    // Allow public read access to tweets
+    match /tweets/{document} {
+      allow read: if true;
+      allow create: if request.auth != null;
+      allow update, delete: if request.auth.uid == resource.data.author_uid;
+      
+      // Allow users to like tweets
+      allow write: if request.auth != null && 
+                   (request.resource.data.likes[request.auth.uid] == true ||
+                    resource.data.author_uid == request.auth.uid);
     }
-    
-    // Allow write access only to authenticated users and only for their own data
-    match /users/{userId} {
-      allow create: if request.auth != null && request.auth.uid == userId;
-      allow read, update, delete: if request.auth != null && request.auth.uid == userId;
+
+    // Allow public read access to profiles
+    match /profiles/{document} {
+      allow read: if true;
+      allow create: if request.auth != null;
+      allow update, delete: if request.auth.uid == resource.data.uid;
     }
-    
-    // Define other collections' security rules as needed
-    // match /collection_name/{documentId} { ... }
+
+    // Allow users to read their own tweets
+    match /user_tweets/{userId}/{document} {
+      allow read: if request.auth.uid == userId;
+      allow create: if request.auth.uid == userId;
+      allow update, delete: if request.auth.uid == resource.data.author_uid;
+      
+      // Allow users to like their own tweets
+      allow write: if request.auth != null && 
+                   (request.resource.data.likes[request.auth.uid] == true ||
+                    resource.data.author_uid == request.auth.uid);
+    }
+
+    // Allow users to read their own profile data
+    match /user_profiles/{userId} {
+      allow read: if request.auth.uid == userId;
+      allow create: if request.auth.uid == userId;
+      allow update, delete: if request.auth.uid == userId;
+    }
   }
 }

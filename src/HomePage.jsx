@@ -14,7 +14,7 @@ import UserProfile from "../components/UserProfile";
 export default function HomePage(props) {
   const profileRef = collection(db, "profiles");
   const [isProfileVisable, setIsProfileVisable] = useState(false);
-  const [profileData, setProfileData] = useState("");
+  const [profileData, setProfileData] = useState({});
   const [profileImg, setProfileImg] = useState("")
   const [userUid, setUserUid] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -47,14 +47,18 @@ export default function HomePage(props) {
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       if (user) {
+        console.log("User is authenticated. UID:", user.uid);
         setUserUid(user.uid);
+      } else {
+        console.log("User is not authenticated.");
       }
     });
-
+  
     return () => {
       unsubscribe();
     };
   }, []);
+  
 
   const fetchProfileInfo = async (uid) => {
     try {
@@ -73,26 +77,32 @@ export default function HomePage(props) {
   const handleImgChangeAndSubmit = async (e) => {
     const imageMimeType = /image\/(png|jpg|jpeg)/i;
     const file = e.target.files[0];
-
+  
     if (!file.type.match(imageMimeType)) {
       alert("Image mime type is not valid");
       return;
     }
-
+  
+    // Check if userUid is available
+    if (!userUid) {
+      console.error("User UID is not available.");
+      return;
+    }
+  
     try {
       setIsLoading(true);
-
+  
       const filename = `${v4()}_${file.name}`;
       const storageRef = ref(storage, `profile-images/${filename}`);
       await uploadBytes(storageRef, file);
       const imageUrl = await getDownloadURL(storageRef);
-
+  
       const userDocRef = doc(profileRef, userUid);
       await updateDoc(userDocRef, { profileImg: imageUrl });
-
+  
       // Fetch updated profile info
       await fetchProfileInfo(userUid);
-
+  
       setProfileImg(""); // Clear the profileImg state after successful upload
       setIsLoading(false);
     } catch (error) {
@@ -100,6 +110,7 @@ export default function HomePage(props) {
       setIsLoading(false);
     }
   };
+  
 
   useEffect(() => {
     if (userUid) {

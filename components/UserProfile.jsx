@@ -59,10 +59,6 @@ export default function UserProfile(props) {
           <strong>Email: </strong>
           {props.profileData.email}
         </p>
-        <p className="profileInfo password">
-          <strong>Password: </strong>
-          {props.profileData.password}
-        </p>
         <button className="signOutBtn" onClick={handleSignOut}>
           Sign Out
         </button>

@@ -23,7 +23,14 @@ export default function TweetCreate(props) {
     <div className="tweetCreateContainer">
       <div className="topRowContainer">
         <div className="leftContainer">
-          <img className="profileImg" src={props.profileImg}></img>
+          <img
+            className="profileImg"
+            src={
+              props.profileImg
+                ? props.profileImg
+                : "https://firebasestorage.googleapis.com/v0/b/react-chat-app-7171d.appspot.com/o/profile-images%2FDefault_pfp.svg.png?alt=media&token=20dab1a3-1acd-479e-8c99-c76dd0782ff4"
+            }
+          ></img>
         </div>
         <textarea
           type="text"
@@ -91,7 +98,10 @@ export default function TweetCreate(props) {
       <div className="bottomRowContainer">
         <div className="leftContainer">
           <label>
-            <img className="tweetIcon postImg" src="https://firebasestorage.googleapis.com/v0/b/react-chat-app-7171d.appspot.com/o/assets%2Fimg.png?alt=media&token=1031f3c7-01a0-4a1e-b250-f81c0a72b1d7"></img>
+            <img
+              className="tweetIcon postImg"
+              src="https://firebasestorage.googleapis.com/v0/b/react-chat-app-7171d.appspot.com/o/assets%2Fimg.png?alt=media&token=1031f3c7-01a0-4a1e-b250-f81c0a72b1d7"
+            ></img>
             <input
               className="fileUpload"
               type="file"

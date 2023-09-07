@@ -7,8 +7,8 @@ import {
 } from "firebase/auth";
 import { auth } from "../src/firebase";
 import { db } from "../src/firebase";
-import { storage } from "../src/firebase";
-import { ref, getDownloadURL } from "firebase/storage";
+// import { storage } from "../src/firebase";
+// import { ref, getDownloadURL } from "firebase/storage";
 import { collection, addDoc, setDoc, doc } from "firebase/firestore";
 
 function SetupPage({ updateCurrentUser }) {
@@ -36,36 +36,37 @@ function SetupPage({ updateCurrentUser }) {
   }
 
   const register = async () => {
-    const profileDefaultImg = ref(
-      storage,
-      `profile-images/Default_pfp.svg.png`
-    );
-    const imageUrl = await getDownloadURL(profileDefaultImg);
-
     try {
+      // Step 1: Create the user account
       const userCredential = await createUserWithEmailAndPassword(
         auth,
         registerUser.email,
         registerUser.password
       );
+  
+      // Step 2: Authenticate the user
       const user = userCredential.user;
-      handleSuccessfulLogin(user);
-
-      // Use the same UID as the document ID
-      const userDocRef = doc(profileRef, user.uid);
-
-      await setDoc(userDocRef, {
-        userName: registerUser.userName,
-        profileImg: imageUrl,
-        email: registerUser.email,
-        password: registerUser.password,
-      });
+      if (user) {
+        handleSuccessfulLogin(user);
+  
+        // Step 3: Create the profile document
+        const userDocRef = doc(profileRef, user.uid);
+  
+        await setDoc(userDocRef, {
+          userName: registerUser.userName,
+          email: registerUser.email,
+         
+        });
+      } else {
+        throw new Error("User authentication failed");
+      }
     } catch (error) {
       setErrorMessage(error.message);
-      console.log(error);
+      console.error(error);
     }
   };
-
+  
+  
   // Register / sign in with Google
   async function signInWithGoogle() {
     try {
@@ -127,7 +128,7 @@ function SetupPage({ updateCurrentUser }) {
   return (
     <div>
       <div className="setupHeader">
-        <h1 className="logo">Tweetpresso</h1>
+        <h1 className="logo">Tweetpressi</h1>
       </div>
       <div className="setupPageContainer ">
         <div className="backgroundSvg ">
@@ -300,4 +301,4 @@ function SetupPage({ updateCurrentUser }) {
   );
 }
 
-export default setupPage;
+export default SetupPage;

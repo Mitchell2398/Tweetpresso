@@ -100,7 +100,9 @@ export default function Feed(props) {
 
         await addDoc(tweetRef, {
           userName: props.profileData.userName,
-          profileImg: props.profileData.profileImg,
+          profileImg: props.profileData.profileImg
+            ? props.profileData.profileImg
+            : "https://firebasestorage.googleapis.com/v0/b/react-chat-app-7171d.appspot.com/o/profile-images%2FDefault_pfp.svg.png?alt=media&token=20dab1a3-1acd-479e-8c99-c76dd0782ff4",
           tweetText,
           tweetGif,
           imageUrl: tweetGif ? "" : imageUrl, // Use the obtained imageUrl
@@ -109,7 +111,9 @@ export default function Feed(props) {
       } else {
         await addDoc(tweetRef, {
           userName: props.profileData.userName,
-          profileImg: props.profileData.profileImg,
+          profileImg: props.profileData.profileImg
+            ? props.profileData.profileImg
+            : "https://firebasestorage.googleapis.com/v0/b/react-chat-app-7171d.appspot.com/o/profile-images%2FDefault_pfp.svg.png?alt=media&token=20dab1a3-1acd-479e-8c99-c76dd0782ff4",
           tweetText,
           tweetGif,
           imageUrl: "",
