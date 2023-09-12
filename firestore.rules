@@ -1,41 +1,11 @@
+// Allow read/write access to all users under any conditions
+// Warning: **NEVER** use this ruleset in production; it allows
+// anyone to overwrite your entire database.
+
 service cloud.firestore {
   match /databases/{database}/documents {
-    // Allow public read access to tweets
-    match /tweets/{document} {
-      allow read: if true;
-      allow create: if request.auth != null;
-      allow update, delete: if request.auth.uid == resource.data.author_uid;
-      
-      // Allow users to like tweets
-      allow write: if request.auth != null && 
-                   (request.resource.data.likes[request.auth.uid] == true ||
-                    resource.data.author_uid == request.auth.uid);
-    }
-
-    // Allow public read access to profiles
-    match /profiles/{document} {
-      allow read: if true;
-      allow create: if request.auth != null;
-      allow update, delete: if request.auth.uid == resource.data.uid;
-    }
-
-    // Allow users to read their own tweets
-    match /user_tweets/{userId}/{document} {
-      allow read: if request.auth.uid == userId;
-      allow create: if request.auth.uid == userId;
-      allow update, delete: if request.auth.uid == resource.data.author_uid;
-      
-      // Allow users to like their own tweets
-      allow write: if request.auth != null && 
-                   (request.resource.data.likes[request.auth.uid] == true ||
-                    resource.data.author_uid == request.auth.uid);
-    }
-
-    // Allow users to read their own profile data
-    match /user_profiles/{userId} {
-      allow read: if request.auth.uid == userId;
-      allow create: if request.auth.uid == userId;
-      allow update, delete: if request.auth.uid == userId;
+    match /{document=**} {
+      allow read, write: if true;
     }
   }
 }
